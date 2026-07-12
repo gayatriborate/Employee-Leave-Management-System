@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Apply Leave</title>
+</head>
+
+<body>
+
+<h1>Apply Leave</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+        Apply Leave
+    </button>
+
+</form>
+
+</body>
+
+</html>

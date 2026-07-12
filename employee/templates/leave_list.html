@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leave List</title>
+</head>
+<body>
+
+<h1>Leave List</h1>
+
+<a href="/leave/apply/">Apply Leave</a>
+
+<br><br>
+
+<form method="GET">
+
+    <select name="status">
+
+        <option value="">All Status</option>
+
+        <option value="Pending">Pending</option>
+
+        <option value="Approved">Approved</option>
+
+        <option value="Rejected">Rejected</option>
+
+    </select>
+
+    <button type="submit" class="btn btn-primary">
+        Filter
+    </button>
+
+</form>
+
+<br>
+
+<table border="1">
+
+<tr>
+    <th>ID</th>
+    <th>Employee</th>
+    <th>Leave Type</th>
+    <th>From Date</th>
+    <th>To Date</th>
+    <th>Reason</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+{% for leave in leaves %}
+
+<tr>
+
+<td>{{ leave.id }}</td>
+
+<td>{{ leave.employee }}</td>
+
+<td>{{ leave.leave_type }}</td>
+
+<td>{{ leave.from_date }}</td>
+
+<td>{{ leave.to_date }}</td>
+
+<td>{{ leave.reason }}</td>
+
+<td>{{ leave.status }}</td>
+
+<td>
+
+<a href="/leave/edit/{{ leave.id }}">
+Edit
+</a>
+
+|
+
+<a href="/leave/delete/{{ leave.id }}"
+onclick="return confirm('Delete Leave?')">
+
+Delete
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee List</title>
+</head>
+<body>
+
+<h1>Employee List</h1>
+
+<form method="GET">
+
+    <input
+        type="text"
+        name="search"
+        placeholder="Search Employee Name or ID">
+
+    <button type="submit">
+        Search
+    </button>
+
+</form>
+
+<br>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Employee ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Department</th>
+        <th>Mobile</th>
+        <th>Date of Joining</th>
+        <th>Action</th>
+    </tr>
+
+    {% for emp in employees %}
+    <tr>
+        <td>{{ emp.id }}</td>
+        <td>{{ emp.employee_id }}</td>
+        <td>{{ emp.name }}</td>
+        <td>{{ emp.email }}</td>
+        <td>{{ emp.department }}</td>
+        <td>{{ emp.mobile }}</td>
+        <td>{{ emp.date_of_joining }}</td>
+        
+        <td><a href="/edit/{{ emp.id }}">Edit</a>
+
+           <a href="/delete/{{ emp.id }}" onclick="return confirm('Are you sure?')"> Delete</a></td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<br>
+
+<a href="/add/">Add New Employee</a>
+
+</body>
+</html>

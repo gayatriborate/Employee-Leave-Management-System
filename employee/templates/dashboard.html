@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="text-center mb-4">
+Dashboard
+</h2>
+
+<div class="row">
+
+<div class="col-md-4 mb-3">
+
+<div class="card bg-primary text-white">
+
+<div class="card-body">
+
+<h4>Total Employees</h4>
+
+<h2>{{ total_employee }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4 mb-3">
+
+<div class="card bg-success text-white">
+
+<div class="card-body">
+
+<h4>Total Leave</h4>
+
+<h2>{{ total_leave }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4 mb-3">
+
+<div class="card bg-warning">
+
+<div class="card-body">
+
+<h4>Pending</h4>
+
+<h2>{{ pending_leave }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<div class="card bg-info text-white">
+
+<div class="card-body">
+
+<h4>Approved</h4>
+
+<h2>{{ approved_leave }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-6">
+
+<div class="card bg-danger text-white">
+
+<div class="card-body">
+
+<h4>Rejected</h4>
+
+<h2>{{ rejected_leave }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

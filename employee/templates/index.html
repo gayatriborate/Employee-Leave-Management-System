@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card shadow-lg rounded-4 p-5 text-center border-0">
+
+    <h1 class="display-3 fw-bold">
+        Employee Leave Management System
+    </h1>
+
+    <p class="lead text-secondary">
+        Manage Employees and Leave Records Easily
+    </p>
+
+    <hr>
+
+    <div class="d-flex justify-content-center flex-wrap gap-3 mt-4">
+
+        <a href="/add/" class="btn btn-primary btn-lg">
+            <i class="bi bi-person-plus"></i>
+            Add Employee
+        </a>
+
+        <a href="/list/" class="btn btn-success btn-lg">
+            <i class="bi bi-list"></i>
+            Employee List
+        </a>
+
+        <a href="/leave/apply/" class="btn btn-warning btn-lg">
+            <i class="bi bi-calendar-plus"></i>
+            Apply Leave
+        </a>
+
+        <a href="/dashboard/" class="btn btn-danger btn-lg">
+            <i class="bi bi-speedometer2"></i>
+            Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
