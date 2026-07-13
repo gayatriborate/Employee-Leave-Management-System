@@ -1,21 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add Employee</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h1>Add Employee</h1>
+{% block content %}
+
+<div class="container mt-5">
+
+<div class="card shadow">
+
+<div class="card-header bg-primary text-white">
+<h3>Add Employee</h3>
+</div>
+
+<div class="card-body">
 
 <form method="POST">
-    {% csrf_token %}
 
-    {{ form.as_p }}
+{% csrf_token %}
 
-    <button type="submit">Save Employee</button>
+{{ form.as_p }}
+
+<button class="btn btn-success">
+Save Employee
+</button>
+
+<a href="/list/" class="btn btn-secondary">
+Back
+</a>
+
 </form>
 
-<a href="/">Home</a>
+</div>
 
-</body>
-</html>
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="text-center">
+
+    <h2>Welcome Employee</h2>
+    <hr>
+
+    <a href="{% url 'apply_leave' %}" class="btn btn-primary m-2">
+        Apply Leave
+    </a>
+
+    <a href="{% url 'leave_list' %}" class="btn btn-success m-2">
+        My Leaves
+    </a>
+
+</div>
+
+{% endblock %}

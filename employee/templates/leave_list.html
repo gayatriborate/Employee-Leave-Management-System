@@ -1,78 +1,93 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Leave List</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h1>Leave List</h1>
+{% block content %}
 
-<a href="/leave/apply/">Apply Leave</a>
+<div class="container mt-4">
 
-<br><br>
+<h2 class="mb-4">Leave List</h2>
 
-<form method="GET">
+{% if not user.is_superuser %}
 
-    <select name="status">
+<a href="/leave/apply/" class="btn btn-success mb-3">
 
-        <option value="">All Status</option>
+Apply Leave
 
-        <option value="Pending">Pending</option>
+</a>
 
-        <option value="Approved">Approved</option>
+{% endif %}
 
-        <option value="Rejected">Rejected</option>
+<table class="table table-bordered table-striped table-hover">
 
-    </select>
-
-    <button type="submit" class="btn btn-primary">
-        Filter
-    </button>
-
-</form>
-
-<br>
-
-<table border="1">
+<thead class="table-dark">
 
 <tr>
-    <th>ID</th>
-    <th>Employee</th>
-    <th>Leave Type</th>
-    <th>From Date</th>
-    <th>To Date</th>
-    <th>Reason</th>
-    <th>Status</th>
-    <th>Action</th>
+
+<th>ID</th>
+<th>Employee</th>
+<th>Leave Type</th>
+<th>From</th>
+<th>To</th>
+<th>Reason</th>
+<th>Status</th>
+
+{% if user.is_superuser %}
+<th>Action</th>
+{% endif %}
+
 </tr>
+
+</thead>
+
+<tbody>
 
 {% for leave in leaves %}
 
 <tr>
 
 <td>{{ leave.id }}</td>
-
 <td>{{ leave.employee }}</td>
-
 <td>{{ leave.leave_type }}</td>
-
 <td>{{ leave.from_date }}</td>
-
 <td>{{ leave.to_date }}</td>
-
 <td>{{ leave.reason }}</td>
-
-<td>{{ leave.status }}</td>
 
 <td>
 
-<a href="/leave/edit/{{ leave.id }}">
+{% if leave.status == 'Approved' %}
+
+<span class="badge bg-success">
+Approved
+</span>
+
+{% elif leave.status == 'Rejected' %}
+
+<span class="badge bg-danger">
+Rejected
+</span>
+
+{% else %}
+
+<span class="badge bg-warning text-dark">
+Pending
+</span>
+
+{% endif %}
+
+</td>
+
+{% if user.is_superuser %}
+
+<td>
+
+<a href="/leave/edit/{{ leave.id }}"
+class="btn btn-warning btn-sm">
+
 Edit
+
 </a>
 
-|
-
 <a href="/leave/delete/{{ leave.id }}"
+class="btn btn-danger btn-sm"
 onclick="return confirm('Delete Leave?')">
 
 Delete
@@ -81,11 +96,16 @@ Delete
 
 </td>
 
+{% endif %}
+
 </tr>
 
 {% endfor %}
 
+</tbody>
+
 </table>
 
-</body>
-</html>
+</div>
+
+{% endblock %}

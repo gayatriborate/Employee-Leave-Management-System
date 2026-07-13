@@ -5,9 +5,18 @@ from django.db.models import Q
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import EmployeeSerializer
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 
+@login_required
 def home(request):
-    return render(request, 'index.html')
+
+    if request.user.is_superuser:
+        return render(request, "hr_home.html")
+
+    return render(request, "employee_home.html")
 
 
 def add_employee(request):
@@ -42,10 +51,11 @@ def delete_employee(request, id):
     return redirect('employee_list')
 
 
-
+@login_required
 def apply_leave(request):
 
     if request.method == "POST":
+
         form = LeaveForm(request.POST)
 
         if form.is_valid():
@@ -57,19 +67,30 @@ def apply_leave(request):
 
     return render(request, 'leave_apply.html', {'form': form})
 
+@login_required
 def leave_list(request):
 
-    status = request.GET.get('status')
+    if request.user.is_superuser:
 
-    if status:
-        leaves = Leave.objects.filter(status=status)
-    else:
+        status = request.GET.get('status')
+        leave_type = request.GET.get('leave_type')
+
         leaves = Leave.objects.all()
+
+        if status:
+            leaves = leaves.filter(status=status)
+
+        if leave_type:
+            leaves = leaves.filter(leave_type=leave_type)
+
+    else:
+
+        employee = Employee.objects.get(email=request.user.email)
+        leaves = Leave.objects.filter(employee=employee)
 
     return render(request, 'leave_list.html', {
         'leaves': leaves
     })
-    
     
 def edit_leave(request, id):
     leave = Leave.objects.get(id=id)
@@ -173,3 +194,32 @@ def delete_employee_api(request, id):
     employee.delete()
 
     return Response({"message": "Employee Deleted Successfully"})
+
+
+def login_view(request):
+
+    if request.method == "POST":
+
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+
+            login(request, user)
+
+            if user.is_superuser:
+                return redirect("dashboard")
+            else:
+                return redirect("home")
+
+        else:
+            messages.error(request, "Invalid Username or Password")
+
+    return render(request, "login.html")
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("login")

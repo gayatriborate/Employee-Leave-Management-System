@@ -11,4 +11,4 @@ class LeaveForm(forms.ModelForm):
 
     class Meta:
         model = Leave
-        fields = "__all__"
+        fields = '__all__'

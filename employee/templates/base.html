@@ -43,29 +43,62 @@
                 Employee Leave Management
             </a>
 
-            <div>
+           <div>
+   
 
-                <a href="/" class="btn btn-outline-light me-2">
-                    <i class="bi bi-house"></i>
-                    Home
-                </a>
+    {% if user.is_authenticated %}
 
-                <a href="/list/" class="btn btn-outline-light me-2">
-                    <i class="bi bi-people"></i>
-                    Employees
-                </a>
+        {% if user.is_superuser %}
 
-                <a href="/leave/list/" class="btn btn-outline-light me-2">
-                    <i class="bi bi-calendar-check"></i>
-                    Leaves
-                </a>
+            <a href="{% url 'home' %}" class="btn btn-outline-light me-2">
+                <i class="bi bi-house"></i>
+                Home
+            </a>
 
-                <a href="/dashboard/" class="btn btn-warning">
-                    <i class="bi bi-speedometer2"></i>
-                    Dashboard
-                </a>
+            <a href="{% url 'employee_list' %}" class="btn btn-outline-light me-2">
+                <i class="bi bi-people"></i>
+                Employees
+            </a>
 
-            </div>
+            <a href="{% url 'leave_list' %}" class="btn btn-outline-light me-2">
+                <i class="bi bi-calendar-check"></i>
+                Leaves
+            </a>
+
+            <a href="{% url 'dashboard' %}" class="btn btn-warning me-2">
+                <i class="bi bi-speedometer2"></i>
+                Dashboard
+            </a>
+
+        {% else %}
+
+            <a href="{% url 'home' %}" class="btn btn-outline-light me-2">
+                <i class="bi bi-house"></i>
+                Home
+            </a>
+
+            <a href="{% url 'apply_leave' %}" class="btn btn-outline-light me-2">
+                <i class="bi bi-calendar-plus"></i>
+                Apply Leave
+            </a>
+
+            <a href="{% url 'leave_list' %}" class="btn btn-outline-light me-2">
+                <i class="bi bi-card-list"></i>
+                My Leaves
+            </a>
+
+        {% endif %}
+
+        <a href="{% url 'logout' %}" class="btn btn-danger">
+            <i class="bi bi-box-arrow-right"></i>
+            Logout
+        </a>
+
+    {% endif %}
+
+</div>
+
+
 
         </div>
 

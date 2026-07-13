@@ -1,23 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Leave</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h1>Edit Leave</h1>
+{% block content %}
 
-<form method="POST">
+<div class="container mt-5">
 
-{% csrf_token %}
+    <div class="card shadow">
 
-{{ form.as_p }}
+        <div class="card-header bg-warning text-dark">
+            <h3>Edit Leave</h3>
+        </div>
 
-<button type="submit">
-Update Leave
-</button>
+        <div class="card-body">
 
-</form>
+            <form method="POST">
 
-</body>
-</html>
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button class="btn btn-primary">
+                    Update Leave
+                </button>
+
+                <a href="{% url 'leave_list' %}" class="btn btn-secondary">
+                    Back
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,21 +1,37 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Employee</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h1>Edit Employee</h1>
+{% block content %}
 
-<form method="POST">
+<div class="container mt-5">
 
-    {% csrf_token %}
+    <div class="card shadow">
 
-    {{ form.as_p }}
+        <div class="card-header bg-warning text-dark">
+            <h3>Edit Employee</h3>
+        </div>
 
-    <button type="submit">Update Employee</button>
+        <div class="card-body">
 
-</form>
+            <form method="POST">
 
-</body>
-</html>
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button class="btn btn-primary">
+                    Update Employee
+                </button>
+
+                <a href="{% url 'employee_list' %}" class="btn btn-secondary">
+                    Back
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

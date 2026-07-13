@@ -1,60 +1,98 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Employee List</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-<h1>Employee List</h1>
+{% block content %}
 
-<form method="GET">
+<div class="container mt-4">
 
-    <input
-        type="text"
-        name="search"
-        placeholder="Search Employee Name or ID">
+<h2 class="mb-4">Employee List</h2>
 
-    <button type="submit">
-        Search
-    </button>
+<form method="GET" class="row mb-3">
+
+<div class="col-md-6">
+
+<input
+type="text"
+name="search"
+class="form-control"
+placeholder="Search Employee Name or ID">
+
+</div>
+
+<div class="col-md-2">
+
+<button class="btn btn-primary w-100">
+Search
+</button>
+
+</div>
+
+<div class="col-md-2">
+
+<a href="/add/" class="btn btn-success w-100">
+Add Employee
+</a>
+
+</div>
 
 </form>
 
-<br>
+<table class="table table-bordered table-hover table-striped">
 
-<table border="1">
-    <tr>
-        <th>ID</th>
-        <th>Employee ID</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Department</th>
-        <th>Mobile</th>
-        <th>Date of Joining</th>
-        <th>Action</th>
-    </tr>
+<thead class="table-dark">
 
-    {% for emp in employees %}
-    <tr>
-        <td>{{ emp.id }}</td>
-        <td>{{ emp.employee_id }}</td>
-        <td>{{ emp.name }}</td>
-        <td>{{ emp.email }}</td>
-        <td>{{ emp.department }}</td>
-        <td>{{ emp.mobile }}</td>
-        <td>{{ emp.date_of_joining }}</td>
-        
-        <td><a href="/edit/{{ emp.id }}">Edit</a>
+<tr>
 
-           <a href="/delete/{{ emp.id }}" onclick="return confirm('Are you sure?')"> Delete</a></td>
-    </tr>
-    {% endfor %}
+<th>ID</th>
+<th>Emp ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Department</th>
+<th>Mobile</th>
+<th>Joining</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for emp in employees %}
+
+<tr>
+
+<td>{{ emp.id }}</td>
+<td>{{ emp.employee_id }}</td>
+<td>{{ emp.name }}</td>
+<td>{{ emp.email }}</td>
+<td>{{ emp.department }}</td>
+<td>{{ emp.mobile }}</td>
+<td>{{ emp.date_of_joining }}</td>
+
+<td>
+
+<a href="/edit/{{ emp.id }}" class="btn btn-warning btn-sm">
+Edit
+</a>
+
+<a href="/delete/{{ emp.id }}"
+class="btn btn-danger btn-sm"
+onclick="return confirm('Delete Employee?')">
+
+Delete
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
 
 </table>
 
-<br>
+</div>
 
-<a href="/add/">Add New Employee</a>
-
-</body>
-</html>
+{% endblock %}
